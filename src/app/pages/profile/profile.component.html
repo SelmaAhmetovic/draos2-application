@@ -1,0 +1,106 @@
+<div class="row">
+  <div class="col-md-12">
+    <profile></profile>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6"  [ngClass]="{'col-md-12': this.user._value.role!='user'}">
+    <card cardTitle='User Details'>
+      <div class="col-md-12 form-group">
+        <label class="control-label">Username</label>
+        <input type="text" class="form-control" placeholder="Username" [(ngModel)]="userName">
+      </div>
+      <div class="col-md-12 form-group">
+        <label class="control-label">First Name</label>
+        <input type="text" class="form-control" placeholder="First Name" [(ngModel)]="firstName">
+      </div>
+      <div class="col-md-12 form-group">
+        <label class="control-label">Last Name</label>
+        <input type="text" class="form-control" placeholder="Last Name" [(ngModel)]="lastName">
+      </div>
+      <!--<div class="col-md-12 form-group">
+        <label class="control-label">Password</label>
+        <input type="text" class="form-control" placeholder="Password">
+      </div>-->
+      <div class="col-md-12">
+        <button class="btn btn-primary">Update Profile</button>
+      </div>
+    </card>
+  <!--  <div class="row card card-block">
+      <div class="col-md-12 form-group">
+        <label class="control-label">Username</label>
+        <input type="text" class="form-control" placeholder="Username">
+      </div>
+      <div class="col-md-12 form-group">
+        <label class="control-label">First Name</label>
+        <input type="text" class="form-control" placeholder="First Name">
+      </div>
+      <div class="col-md-12 form-group">
+        <label class="control-label">Last Name</label>
+        <input type="text" class="form-control" placeholder="Last Name">
+      </div>
+      <div class="col-md-12 form-group">
+        <label class="control-label">Email address</label>
+        <input type="text" class="form-control" placeholder="Email address">
+      </div>
+      <div class="col-md-12 form-group">
+        <label class="control-label">Password</label>
+        <input type="text" class="form-control" placeholder="Password">
+      </div>
+      <div class="col-md-12">
+        <button class="btn btn-primary">Update Profile</button>
+      </div>
+    </div>-->
+  </div>
+  <div class="col-md-6" *ngIf="this.user._value.role=='user'">
+  <card cardTitle='User Skills'>
+    <div echarts [options]="BarOptionUser" [loading]="showloading" theme="dark" class="demo-chart"></div>
+  </card>
+  </div>
+</div>
+<div class="row" *ngIf="this.user._value.role=='user'">
+  <div class="col-md-12">
+    <card cardTitle="Training list">
+      <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+          <th>TRAINING</th>
+          <th>SKILL</th>
+          <th>COMPLETE TRAINING</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of userSkillsManagementData | paginate: { id: 'pager', itemsPerPage: pageSize, currentPage: pageNumber};let index = index">
+          <td>{{item.trainingTitle}}</td>
+          <td>{{item.trainingSkill}}</td>
+          <td>
+            <mat-checkbox>Completed</mat-checkbox>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <form class="pagination-wrapper">
+        <div class="form-group pages">
+          <pagination-controls class="my-pagination" id="pager" (pageChange)="pageChanged($event)" maxSize="9" directionLinks="true"
+                               autoHide="true" previousLabel="Prev" nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page"
+                               screenReaderCurrentLabel="You're on page">
+          </pagination-controls>
+        </div>
+        <div class="form-group options pages">
+          <div class="input-group input-group-sm">
+            <select class="form-control" name="pageChangedName" [(ngModel)]="pageSize" (ngModelChange)="loadData()">
+              <option>1</option>
+              <option>5</option>
+              <option>10</option>
+              <option>20</option>
+              <option>50</option>
+              <option>100</option>
+              <option>200</option>
+            </select>
+            <span class="input-group-addon addon-right">Per Page</span>
+          </div>
+        </div>
+      </form>
+    </card>
+  </div>
+</div>

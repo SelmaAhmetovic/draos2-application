@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="col-md-12">
+    <label for="typeahead-basic">Search for a user:</label>
+    <input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" (blur)="filterDataTable(model)"/>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <label for="typeahead-basic">Search for a skill:</label>
+    <input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="modelSkill" [ngbTypeahead]="searchSkill"/>
+  </div>
+  <div class="col-md-12">
+    <button class="btn btn-primary" (click)="addSkill(model,modelSkill)">Add skill</button>
+  </div>
+</div>
+<br>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <card cardTitle="Data Table">
+      <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+          <th>SKILL</th>
+          <th>CATEGORY</th>
+          <th>LEVEL</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of skillsManagementData | paginate: { id: 'pager', itemsPerPage: pageSize, currentPage: pageNumber};let index = index">
+          <td>{{item.skillTitle}}</td>
+          <td>{{item.categoryTitle}}</td>
+          <td>
+            <ngb-rating [rate]="item.skillLevel" class="align-items-center">
+              <ng-template let-fill="fill" let-index="index">
+                <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+              </ng-template>
+            </ngb-rating>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <form class="pagination-wrapper">
+        <div class="form-group pages">
+          <pagination-controls class="my-pagination" id="pager" (pageChange)="pageChanged($event)" maxSize="9" directionLinks="true"
+                               autoHide="true" previousLabel="Prev" nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page"
+                               screenReaderCurrentLabel="You're on page">
+          </pagination-controls>
+        </div>
+        <div class="form-group options pages">
+          <div class="input-group input-group-sm">
+            <select class="form-control" name="pageChangedName" [(ngModel)]="pageSize" (ngModelChange)="loadData()">
+              <option>1</option>
+              <option>5</option>
+              <option>10</option>
+              <option>20</option>
+              <option>50</option>
+              <option>100</option>
+              <option>200</option>
+            </select>
+            <span class="input-group-addon addon-right">Per Page</span>
+          </div>
+        </div>
+      </form>
+    </card>
+  </div>
+</div>
+

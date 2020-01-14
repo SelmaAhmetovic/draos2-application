@@ -1,0 +1,36 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { routing } from './pages.routing';
+
+import { LayoutModule } from '../shared/layout.module';
+import { SharedModule } from '../shared/shared.module';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+/* components */
+import { PagesComponent } from './pages.component';
+import {SkillsManagementDataService} from "./skills-management-page/skillsManagementData.service";
+import {SkillsDataService} from "./skills-page/skillsData.service";
+import {AlertService} from "../shared/services/alert.service";
+/*import { LoginComponent } from './login/login.component';
+import {RegisterComponent} from "./register/register.component";*/
+
+@NgModule({
+    imports: [
+        CommonModule,
+        LayoutModule,
+        SharedModule,
+        routing,
+        MatCheckboxModule,
+        ReactiveFormsModule
+    ],
+    declarations: [
+        PagesComponent
+    ],
+  providers: [
+    SkillsManagementDataService,
+    SkillsDataService,
+    AlertService
+  ]
+})
+export class PagesModule { }

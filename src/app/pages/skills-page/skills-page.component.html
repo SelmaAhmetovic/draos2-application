@@ -1,0 +1,72 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="row card card-block">
+      <div class="col-md-12 form-group">
+        <label class="control-label">Skill Title</label>
+        <input type="text" class="form-control" [(ngModel)]="skillTitle" placeholder="Skill Title">
+      </div>
+      <div class="col-md-12 form-group">
+        <label class="control-label">Category</label>
+        <input type="text" class="form-control" [(ngModel)]="skillCategory" placeholder="Category">
+      </div>
+      <div class="col-md-12 form-group">
+        <label class="control-label">Description</label>
+        <textarea class="form-control" placeholder="Description" [(ngModel)]="skillDescription"></textarea>
+      </div>
+      <div class="col-md-12">
+        <button class="btn btn-primary" (click)="addItem(skillTitle,skillCategory,skillDescription)">Add skill</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <card cardTitle="Data Table">
+      <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+          <th>SKILL TITLE</th>
+          <th>CATEGORY</th>
+         <!-- <th>EDIT</th>-->
+          <th>DELETE</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of skillData | paginate: { id: 'pager', itemsPerPage: pageSize, currentPage: pageNumber};let index = index">
+          <td>{{item.skillTitle}}</td>
+          <td>{{item.skillCategory}}</td>
+          <!--<td>
+            <span class="fa fa-edit"></span>
+          </td>-->
+          <td>
+            <span (click)="this.deleteItem(item.id)" class="fa fa-trash delete-button"></span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <form class="pagination-wrapper">
+        <div class="form-group pages">
+          <pagination-controls class="my-pagination" id="pager" (pageChange)="pageChanged($event)" maxSize="9" directionLinks="true"
+                               autoHide="true" previousLabel="Prev" nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page"
+                               screenReaderCurrentLabel="You're on page">
+          </pagination-controls>
+        </div>
+        <div class="form-group options pages">
+          <div class="input-group input-group-sm">
+            <select class="form-control" name="pageChangedName" [(ngModel)]="pageSize" (ngModelChange)="loadData()">
+              <option>1</option>
+              <option>5</option>
+              <option>10</option>
+              <option>20</option>
+              <option>50</option>
+              <option>100</option>
+              <option>200</option>
+            </select>
+            <span class="input-group-addon addon-right">Per Page</span>
+          </div>
+        </div>
+      </form>
+    </card>
+  </div>
+</div>
+

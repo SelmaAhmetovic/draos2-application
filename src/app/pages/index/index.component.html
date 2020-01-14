@@ -1,0 +1,128 @@
+<div class="row">
+  <!--<div class="col-md-6 animated fadeIn">
+    <form class="form-inline md-form form-sm">
+      <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search"
+             mdbInput>
+      <i class="fas fa-search" aria-hidden="true"></i>
+    </form>
+  </div>-->
+ <!-- <div class="col-md-3 animated fadeIn">
+    <div class="card card-block tip-card">
+      <div class="tip-msg">
+        <h4>Current Users</h4>
+        <span>102,018 / 200,450</span>
+      </div>
+      <button class="tip-ico tip-ico-primary">
+        <i class="fa fa-group fa-fw"></i>
+      </button>
+    </div>
+  </div>
+  <div class="col-md-3 animated fadeIn">
+    <div class="card card-block tip-card">
+      <div class="tip-msg">
+        <h4>Messages</h4>
+        <span>2 messages</span>
+      </div>
+      <button class="tip-ico tip-ico-info">
+        <i class="fa fa-comments fa-fw"></i>
+      </button>
+    </div>
+  </div>
+  <div class="col-md-3 animated fadeIn">
+    <div class="card card-block tip-card">
+      <div class="tip-msg">
+        <h4>Mails</h4>
+        <span>2 mails</span>
+      </div>
+      <button class="tip-ico tip-ico-success">
+        <i class="fa fa-envelope fa-fw"></i>
+      </button>
+    </div>
+  </div>
+  <div class="col-md-3 animated fadeIn">
+    <div class="card card-block tip-card">
+      <div class="tip-msg">
+        <h4>Feedback</h4>
+        <span>20 feedbacks</span>
+      </div>
+      <button class="tip-ico tip-ico-danger">
+        <i class="fa fa-warning fa-fw"></i>
+      </button>
+    </div>
+  </div>-->
+  </div>
+  <div class="row">
+  <div class="col-md-6">
+      <card cardTitle='Users knowledge char: based on skills level'>
+        <div echarts [options]="BarOption" [loading]="showloading" theme="dark" class="demo-chart"></div>
+      </card>
+   <!-- <card cardTitle='Bar Chart' isCollapse="true">
+      <div echarts [options]="AnimationBarOption" [loading]="showloading" theme="dark"></div>
+    </card>-->
+  </div>
+  <!--<div class="col-md-4">
+    <card cardTitle="Todo List" isCollapse="true">
+      <du-todolist></du-todolist>
+    </card>
+  </div>-->
+  <div class="col-md-6">
+    <card cardTitle='All users skills'>
+      <div echarts [options]="PieOption" [loading]="showloading" theme="dark" class="demo-chart"></div>
+    </card>
+  </div>
+
+  <!--<div class="col-md-6">
+    <card>
+      <profile></profile>
+    </card>
+  </div>
+  <div class="col-md-6">
+    <card>
+      <weather></weather>
+    </card>
+  </div>-->
+  </div>
+<div class="row" *ngIf="this.user.value.username ==='superAdmin'">
+  <div class="col-md-12">
+    <card cardTitle="Data Table">
+      <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+          <th>USERNAME</th>
+          <th>LOG</th>
+          <th>DATE AND TIME</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of logsData | paginate: { id: 'pager', itemsPerPage: pageSize, currentPage: pageNumber};let index = index">
+          <td>{{item.username}}</td>
+          <td>{{item.log}}</td>
+          <td>{{item.dateAndTime}}</td>
+        </tr>
+        </tbody>
+      </table>
+      <form class="pagination-wrapper">
+        <div class="form-group pages">
+          <pagination-controls class="my-pagination" id="pager" (pageChange)="pageChanged($event)" maxSize="9" directionLinks="true"
+                               autoHide="true" previousLabel="Prev" nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page"
+                               screenReaderCurrentLabel="You're on page">
+          </pagination-controls>
+        </div>
+        <div class="form-group options pages">
+          <div class="input-group input-group-sm">
+            <select class="form-control" name="pageChangedName" [(ngModel)]="pageSize" (ngModelChange)="loadData()">
+              <option>1</option>
+              <option>5</option>
+              <option>10</option>
+              <option>20</option>
+              <option>50</option>
+              <option>100</option>
+              <option>200</option>
+            </select>
+            <span class="input-group-addon addon-right">Per Page</span>
+          </div>
+        </div>
+      </form>
+    </card>
+  </div>
+</div>

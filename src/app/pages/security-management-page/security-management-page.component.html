@@ -1,0 +1,156 @@
+<div class="row">
+  <div class="col-md-12">
+    <label for="typeahead-basic">Search for a user:</label>
+    <input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="user" [ngbTypeahead]="search" (blur)="loadRoles()"/>
+  </div>
+</div>
+<br>
+<br>
+<hr>
+<!--<div class="row">
+  <div class="col-md-12">
+    <card cardTitle="Data Table">
+      <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+          <th colspan="2"><b>ROLES</b></th>
+          <th colspan="2"><b>PERMISSIONS</b></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of securityManagementData | paginate: { id: 'pager', itemsPerPage: pageSize, currentPage: pageNumber};let index = index">
+          <td>
+            {{item.rolesTitle}}
+
+          </td>
+          <td>
+            <mat-checkbox>Assigned</mat-checkbox>
+          </td>
+          <td>
+            {{item.permissionsTitle}}
+          </td>
+          <td>
+            <mat-checkbox *ngIf="item.permissionsTitle!=''">Assigned</mat-checkbox>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <form class="pagination-wrapper">
+        <div class="form-group pages">
+          <pagination-controls class="my-pagination" id="pager" (pageChange)="pageChanged($event)" maxSize="9" directionLinks="true"
+                               autoHide="true" previousLabel="Prev" nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page"
+                               screenReaderCurrentLabel="You're on page">
+          </pagination-controls>
+        </div>
+        <div class="form-group options pages">
+          <div class="input-group input-group-sm">
+            <select class="form-control" name="pageChangedName" [(ngModel)]="pageSize" (ngModelChange)="loadData()">
+              <option>1</option>
+              <option>5</option>
+              <option>10</option>
+              <option>20</option>
+              <option>50</option>
+              <option>100</option>
+              <option>200</option>
+            </select>
+            <span class="input-group-addon addon-right">Per Page</span>
+          </div>
+        </div>
+      </form>
+    </card>
+  </div>
+</div>-->
+<div class="row">
+  <div class="col-md-12">
+    <card cardTitle="ROLES">
+      <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+          <th>ROLE TITLE</th>
+          <th>ROLE DESCRIPTION</th>
+          <th>ASSIGNED</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of rolesData | paginate: { id: 'pager', itemsPerPage: pageSize, currentPage: pageNumber};let index = index">
+          <td>{{item.roleTitle}}</td>
+          <td>{{item.roleDescription}}</td>
+          <td>
+            <mat-checkbox [(ngModel)]="item.ischecked"  (change)="assigned(item)">Assigned</mat-checkbox>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <form class="pagination-wrapper">
+        <div class="form-group pages">
+          <pagination-controls class="my-pagination" id="pager" (pageChange)="pageChanged($event)" maxSize="9" directionLinks="true"
+                               autoHide="true" previousLabel="Prev" nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page"
+                               screenReaderCurrentLabel="You're on page">
+          </pagination-controls>
+        </div>
+        <div class="form-group options pages">
+          <div class="input-group input-group-sm">
+            <select class="form-control" name="pageChangedName" [(ngModel)]="pageSize" (ngModelChange)="loadData()">
+              <option>1</option>
+              <option>5</option>
+              <option>10</option>
+              <option>20</option>
+              <option>50</option>
+              <option>100</option>
+              <option>200</option>
+            </select>
+            <span class="input-group-addon addon-right">Per Page</span>
+          </div>
+        </div>
+      </form>
+    </card>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-12">
+    <card cardTitle="PERMISSIONS">
+      <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+          <th>PERMISSION TITLE</th>
+          <th>PERMISSION DESCRIPTION</th>
+          <th>ASSIGNED</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of permissionData | paginate: { id: 'pager', itemsPerPage: pageSize, currentPage: pageNumber};let index = index">
+          <td>{{item.permissionTitle}}</td>
+          <td>{{item.permissionDescription}}</td>
+          <td>
+            <mat-checkbox>Assigned</mat-checkbox>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <form class="pagination-wrapper">
+        <div class="form-group pages">
+          <pagination-controls class="my-pagination" id="pager" (pageChange)="pageChanged($event)" maxSize="9" directionLinks="true"
+                               autoHide="true" previousLabel="Prev" nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page"
+                               screenReaderCurrentLabel="You're on page">
+          </pagination-controls>
+        </div>
+        <div class="form-group options pages">
+          <div class="input-group input-group-sm">
+            <select class="form-control" name="pageChangedName" [(ngModel)]="pageSize" (ngModelChange)="loadData()">
+              <option>1</option>
+              <option>5</option>
+              <option>10</option>
+              <option>20</option>
+              <option>50</option>
+              <option>100</option>
+              <option>200</option>
+            </select>
+            <span class="input-group-addon addon-right">Per Page</span>
+          </div>
+        </div>
+      </form>
+    </card>
+  </div>
+</div>
