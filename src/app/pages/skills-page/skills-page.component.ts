@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {SkillsDataService} from "./skillsData.service";
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-skills-page',
@@ -18,7 +19,7 @@ export class SkillsPageComponent implements OnInit {
   skillCategory: string = '';
   skillDescription: string = '';
 
-  constructor(private _skillsDataService: SkillsDataService) { }
+  constructor(private _skillsDataService: SkillsDataService, private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.loadData();
@@ -34,9 +35,11 @@ export class SkillsPageComponent implements OnInit {
 
   deleteItem(skillId: any) {
     this._skillsDataService.deleteItem(skillId);
+    this.toastrService.show('Skill successfully deleted');
   }
 
   addItem(skillTitle, skillCategory, skillDescription) {
     this._skillsDataService.addItem(skillTitle, skillCategory, skillDescription);
+    this.toastrService.success('Skill successfully added');
   }
 }

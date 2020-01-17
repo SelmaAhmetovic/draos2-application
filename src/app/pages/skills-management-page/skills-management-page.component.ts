@@ -3,6 +3,7 @@ import {SkillsManagementDataService} from "./skillsManagementData.service";
 import {Observable} from 'rxjs';
 import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
 import {forEach} from "@angular/router/src/utils/collection";
+import {ToastrService} from 'ngx-toastr';
 
 
 /*const users = ['Selma Ahmetovic', 'Adijata Vukas', 'Assistant', 'Fuad Begić', 'Professor', 'Alema Salkić',
@@ -26,7 +27,7 @@ export class SkillsManagementPageComponent implements OnInit {
   public modelSkill: any;
   private skills: any;
 
-  constructor(private _skillsManagementDataService: SkillsManagementDataService) {
+  constructor(private _skillsManagementDataService: SkillsManagementDataService, private toastrService: ToastrService) {
     this.users = this.getUsers();
     this.skills = this.getSkills();
   }
@@ -55,6 +56,7 @@ export class SkillsManagementPageComponent implements OnInit {
   addSkill(user: any, skill: any) {
     this.skillsManagementData = this._skillsManagementDataService.addSkill(user,skill);
     this.filterDataTable(user);
+    this.toastrService.success('Skill successfully added to user ' + user.toString());
   }
 
   filterDataTable(user: any) {

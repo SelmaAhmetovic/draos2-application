@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {PermissionsDataService} from "./permissionsData.service";
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-permissions-page',
@@ -17,7 +18,7 @@ export class PermissionsPageComponent implements OnInit {
   permissionTitle: string = '';
   permissionDescription: string = '';
 
-  constructor(private _permissionsDataService: PermissionsDataService) { }
+  constructor(private _permissionsDataService: PermissionsDataService, private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.loadData();
@@ -29,10 +30,12 @@ export class PermissionsPageComponent implements OnInit {
 
   deleteItem(id: any) {
     this._permissionsDataService.deleteItem(id);
+    this.toastrService.show('Permission successfully deleted');
   }
 
   addItem(permissionTitle,permissionDescription) {
     this._permissionsDataService.addItem(permissionTitle, permissionDescription);
+    this.toastrService.success('Permission successfully added');
   }
 
   pageChanged(pN: number): void {

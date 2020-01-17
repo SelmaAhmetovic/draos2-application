@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {RolesDataService} from "./rolesData.service";
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-roles-page',
@@ -17,7 +18,7 @@ export class RolesPageComponent implements OnInit {
   roleTitle ='';
   roleDescription:'';
 
-  constructor(private _rolesDataService: RolesDataService) { }
+  constructor(private _rolesDataService: RolesDataService, private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.loadData();
@@ -29,10 +30,12 @@ export class RolesPageComponent implements OnInit {
 
   deleteRole(roleId: any) {
     this._rolesDataService.deleteRole(roleId);
+    this.toastrService.show('Role successfully deleted');
   }
 
   addRole(roleTitle, roleDescription) {
     this._rolesDataService.addRole(roleTitle,roleDescription);
+    this.toastrService.success('Role successfully deleted');
   }
 
   pageChanged(pN: number): void {

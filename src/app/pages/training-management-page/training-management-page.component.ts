@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {TrainingManagementDataService} from "./trainingManagementData.service";
 import {Observable} from 'rxjs';
 import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
+import {ToastrService} from 'ngx-toastr';
 
 
 const users = ['Selma Ahmetovic', 'Adijata Vukas', 'Assistant', 'Fuad Begić', 'Professor', 'Alema Salkić',
@@ -24,7 +25,7 @@ export class TrainingManagementPageComponent implements OnInit {
   public model: any;
   users: any;
 
-  constructor(private _trainingManagementDataService: TrainingManagementDataService) {
+  constructor(private _trainingManagementDataService: TrainingManagementDataService, private toastrService: ToastrService) {
     this.users = this.getUsers();
   }
 
@@ -44,6 +45,7 @@ export class TrainingManagementPageComponent implements OnInit {
 
   addTraining(userName, trainingTitle, trainingSkill) {
     this._trainingManagementDataService.addTraining(userName, trainingTitle, trainingSkill);
+    this.toastrService.success('Training successfully added to user ' + userName.toString());
   }
 
   pageChanged(pN: number): void {

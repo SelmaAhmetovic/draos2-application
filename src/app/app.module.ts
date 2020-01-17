@@ -16,6 +16,7 @@ import {JwtInterceptor} from "./shared/helpers/jwt.interceptor";
 import {ErrorInterceptor} from "./shared/helpers/error.interceptor";
 import {fakeBackendProvider} from "./shared/helpers/fake-backend";
 import {AlertComponent} from "./pages/alert/alert.component";
+import {ToastrModule} from 'ngx-toastr';
 
 
 
@@ -30,6 +31,7 @@ import {AlertComponent} from "./pages/alert/alert.component";
     routing,
     MDBBootstrapModule,
     HttpClientModule,
+    ToastrModule.forRoot(),
     HttpModule
   ],
   declarations: [

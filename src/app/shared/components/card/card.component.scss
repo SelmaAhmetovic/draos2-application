@@ -51,6 +51,9 @@
     padding: 10px;
     height: auto;
     overflow-x: hidden;
+  @media (max-width:600px) {
+    overflow-x: auto !important;
+  }
 }
 
 .card-footer {

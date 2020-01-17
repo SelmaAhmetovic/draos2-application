@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {debounceTime, distinctUntilChanged, map} from "rxjs/operators";
 
 import {forEach} from "@angular/router/src/utils/collection";
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-trainings-page',
@@ -24,7 +25,7 @@ export class TrainingPageComponent implements OnInit {
   public modelSkill: any;
   skills: any;
 
-  constructor(private _trainingDataService: TrainingDataService) {
+  constructor(private _trainingDataService: TrainingDataService, private toastrService: ToastrService) {
     this.skills = this.getSkills()
   }
 
@@ -51,10 +52,12 @@ export class TrainingPageComponent implements OnInit {
 
   deleteItem(trainingId: any) {
     this._trainingDataService.deleteItem(trainingId);
+    this.toastrService.show('Training successfully deleted');
   }
 
   addItem(trainingTitle, trainingSkill, trainingDescription) {
     this._trainingDataService.addItem(trainingTitle, trainingSkill, trainingDescription);
+    this.toastrService.success('Training successfully deleted');
   }
 
   searchSkill = (text$: Observable<string>) =>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CategoriesDataService} from "./categoriesData.service";
 import {PermissionsDataService} from '../permissions-page/permissionsData.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-categories-page',
@@ -17,7 +18,7 @@ export class CategoriesPageComponent implements OnInit {
   pageSize = 10;
   pageNumber = 1;
 
-  constructor(private _categoriesDataService: CategoriesDataService) { }
+  constructor(private _categoriesDataService: CategoriesDataService, private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.loadData();
@@ -33,10 +34,12 @@ export class CategoriesPageComponent implements OnInit {
 
   deleteItem(id: any) {
     this._categoriesDataService.deleteItem(id);
+    this.toastrService.show('Category successfully deleted');
   }
 
   addItem(permissionTitle,permissionDescription) {
     this._categoriesDataService.addItem(permissionTitle, permissionDescription);
+    this.toastrService.success('Category successfully added');
   }
 
 
