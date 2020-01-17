@@ -6,6 +6,10 @@
     overflow-x: hidden;
     @include transition(all .5s);
     border: none;
+  @media (max-width:600px) {
+    z-index: 1000;
+    position: absolute;
+  }
     .sidebar-top-line {
         display: block;
         width: 80%;
@@ -42,7 +46,7 @@
 }
 
 @media (max-width:970px) {
-    .pages-sider {
+   /* .pages-sider {
         width: 0;
-    }
+    }*/
 }

@@ -13,14 +13,16 @@ import {SecurityManagementDataService} from "../../../pages/security-management-
 export class SidebarComponent implements OnInit {
 
   public menuInfo: Array<any> = [];
-  public sidebarToggle = true;
+  public sidebarToggle = false;
   public curentUser: any;
   public initMenu: any;
   public roleIds: any;
+  public isMobile = false;
 
   constructor(private _menuService: menuService,
     public _globalService: GlobalService, private _securityManagementDataService: SecurityManagementDataService) {
     this.curentUser = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+    this.isMobile = window.navigator.userAgent.includes('Mobi');
   }
 
   ngOnInit() {
@@ -49,27 +51,27 @@ export class SidebarComponent implements OnInit {
         }
       //this.menuInfo.filter((function(el) { return ( el.path != "skills-page" && el.path != "categories-page" && el.path != "skills-management-page" && el.path != "training-management-page"); }));
     } 
-    this._sidebarToggle();
+    this._sidebarToggle(false);
     this._menuService.selectItem(this.menuInfo);
     this._isSelectItem(this.menuInfo);
   }
 
-  public _sidebarToggle() {
-    // this._globalService._sidebarToggleState(true);
-    /* this._globalService.sidebarToggle$.subscribe(sidebarToggle => {
-      this.sidebarToggle = sidebarToggle;
-    }, error => {
-      console.log('Error: ' + error);
-    }); */
-    this._globalService.data$.subscribe(data => {
-      if (data.ev === 'sidebarToggle') {
-        this.sidebarToggle = data.value;
-      }
-    }, error => {
-      console.log('Error: ' + error);
-    });
+  public _sidebarToggle(data) {
+    if(data===true && this.isMobile) {
+      this._globalService.dataBusChanged('sidebarToggle', !this.sidebarToggle);
+    }
+    if(data===false) {
+      this._globalService.data$.subscribe(data => {
+        if (data.ev === 'sidebarToggle') {
+          this.sidebarToggle = data.value;
+        }
+      }, error => {
+        console.log('Error: ' + error);
+      });
+    }
 
   }
+
 
   _isSelectItem(item) {
     for (const i in item) {

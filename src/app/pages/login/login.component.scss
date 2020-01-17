@@ -7,6 +7,9 @@
     transform: translate(-50%, -50%);
     width: 400px;
     height: auto;
+  @media (max-width:600px) {
+    width: 250px;
+  }
     .form-group {
         padding: 0;
     }

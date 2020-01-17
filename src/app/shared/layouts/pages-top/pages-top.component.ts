@@ -18,7 +18,7 @@ export class PagesTopComponent {
   currentUser: User;
 
 
-  sidebarToggle: boolean = true;
+  sidebarToggle: boolean = false;
   tip = { ring: true, email: true };
 
 
