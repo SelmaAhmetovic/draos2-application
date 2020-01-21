@@ -10,12 +10,12 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { HttpModule } from '@angular/http'
 import { ReactiveFormsModule }    from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import {RegisterComponent} from "./pages/register/register.component";
+import {RegisterComponent} from './pages/register';
 import {LoginComponent} from "./pages/login/login.component";
-import {JwtInterceptor} from "./shared/helpers/jwt.interceptor";
-import {ErrorInterceptor} from "./shared/helpers/error.interceptor";
-import {fakeBackendProvider} from "./shared/helpers/fake-backend";
-import {AlertComponent} from "./pages/alert/alert.component";
+import {JwtInterceptor} from './shared/helpers';
+import {ErrorInterceptor} from './shared/helpers';
+import {fakeBackendProvider} from './shared/helpers';
+import {AlertComponent} from './pages/alert';
 import {ToastrModule} from 'ngx-toastr';
 
 

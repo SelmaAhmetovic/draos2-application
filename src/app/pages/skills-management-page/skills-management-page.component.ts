@@ -6,9 +6,6 @@ import {forEach} from "@angular/router/src/utils/collection";
 import {ToastrService} from 'ngx-toastr';
 
 
-/*const users = ['Selma Ahmetovic', 'Adijata Vukas', 'Assistant', 'Fuad Begić', 'Professor', 'Alema Salkić',
-  'Amila Japalak', 'Amila Karšić', 'Amina Spahić', 'Haris Osmanbegović'];*/
-
 @Component({
   selector: 'app-skills-management-page',
   templateUrl: './skills-management-page.component.html',
@@ -19,8 +16,6 @@ export class SkillsManagementPageComponent implements OnInit {
 
   skillsManagementData: any;
   users: any;
-
-  /* pagination Info */
   pageSize = 10;
   pageNumber = 1;
   public model: any;

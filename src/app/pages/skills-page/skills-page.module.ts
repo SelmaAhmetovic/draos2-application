@@ -5,6 +5,7 @@ import { SharedModule } from '../../shared/shared.module';
 import {SkillsPageComponent} from "./skills-page.component";
 import {NgxPaginationModule} from "ngx-pagination";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     imports: [
@@ -13,7 +14,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         routing,
         NgxPaginationModule,
         FormsModule,
-        ReactiveFormsModule,
+        NgbModule,
+        ReactiveFormsModule
     ],
     declarations: [
       SkillsPageComponent

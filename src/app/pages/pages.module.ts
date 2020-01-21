@@ -11,7 +11,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PagesComponent } from './pages.component';
 import {SkillsManagementDataService} from "./skills-management-page/skillsManagementData.service";
 import {SkillsDataService} from "./skills-page/skillsData.service";
-import {AlertService} from "../shared/services/alert.service";
+import {AlertService} from '../shared/services';
+import {DeleteModalComponent} from '../shared/modals/delete-modal/delete-modal.component';
 /*import { LoginComponent } from './login/login.component';
 import {RegisterComponent} from "./register/register.component";*/
 
@@ -22,15 +23,18 @@ import {RegisterComponent} from "./register/register.component";*/
         SharedModule,
         routing,
         MatCheckboxModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
     ],
     declarations: [
         PagesComponent
     ],
-  providers: [
-    SkillsManagementDataService,
-    SkillsDataService,
-    AlertService
-  ]
+    entryComponents: [
+      DeleteModalComponent
+    ],
+    providers: [
+      SkillsManagementDataService,
+      SkillsDataService,
+      AlertService
+    ]
 })
 export class PagesModule { }

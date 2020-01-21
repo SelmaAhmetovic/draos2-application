@@ -6,8 +6,8 @@
         <input type="text" class="form-control" [(ngModel)]="skillTitle" placeholder="Skill Title">
       </div>
       <div class="col-md-12 form-group">
-        <label class="control-label">Category</label>
-        <input type="text" class="form-control" [(ngModel)]="skillCategory" placeholder="Category">
+        <label class="control-label">Search for category</label>
+        <input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="skillCategory" [ngbTypeahead]="searchCategory"/>
       </div>
       <div class="col-md-12 form-group">
         <label class="control-label">Description</label>
@@ -39,7 +39,7 @@
             <span class="fa fa-edit"></span>
           </td>-->
           <td>
-            <span (click)="this.deleteItem(item.id)" class="fa fa-trash delete-button"></span>
+            <span (click)="this.deleteItem(item.id, item.skillTitle)" class="fa fa-trash delete-button"></span>
           </td>
         </tr>
         </tbody>

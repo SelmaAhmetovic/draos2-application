@@ -5,6 +5,8 @@ import {debounceTime, distinctUntilChanged, map} from "rxjs/operators";
 
 import {forEach} from "@angular/router/src/utils/collection";
 import {ToastrService} from 'ngx-toastr';
+import {DeleteModalComponent} from '../../shared/modals/delete-modal/delete-modal.component';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-trainings-page',
@@ -25,7 +27,9 @@ export class TrainingPageComponent implements OnInit {
   public modelSkill: any;
   skills: any;
 
-  constructor(private _trainingDataService: TrainingDataService, private toastrService: ToastrService) {
+  constructor(private _trainingDataService: TrainingDataService,
+              private toastrService: ToastrService,
+              private _modalService: NgbModal) {
     this.skills = this.getSkills()
   }
 
@@ -50,14 +54,27 @@ export class TrainingPageComponent implements OnInit {
     this.trainingData = this._trainingDataService.getData();
   }
 
-  deleteItem(trainingId: any) {
-    this._trainingDataService.deleteItem(trainingId);
-    this.toastrService.show('Training successfully deleted');
+  deleteItem(trainingId: any, trainingTitle: any) {
+    const modalRef = this._modalService.open(DeleteModalComponent);
+    modalRef.componentInstance.id = trainingId;
+    modalRef.componentInstance.name = trainingTitle;
+    modalRef.componentInstance.item = 'training';
+    modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
+      if(receivedEntry==='ok') {
+        this._trainingDataService.deleteItem(trainingId);
+        this.toastrService.show('Training successfully deleted');
+      }
+      modalRef.close();
+    });
+
   }
 
   addItem(trainingTitle, trainingSkill, trainingDescription) {
     this._trainingDataService.addItem(trainingTitle, trainingSkill, trainingDescription);
     this.toastrService.success('Training successfully deleted');
+    this.trainingTitle = '';
+    this.trainingSkill = '';
+    this.trainingDescription = '';
   }
 
   searchSkill = (text$: Observable<string>) =>

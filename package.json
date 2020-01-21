@@ -45,6 +45,7 @@
     "neo-async": "^2.6.0",
     "ng2-file-upload": "^1.4.0",
     "ng2-select": "^2.0.0",
+    "ngx-bootstrap": "^5.3.2",
     "ngx-echarts": "^4.2.2",
     "ngx-modal": "0.0.29",
     "ngx-pagination": "^3.3.1",
@@ -58,6 +59,7 @@
     "rxjs": "~6.3.3",
     "sweetalert2": "^8.19.0",
     "tslib": "^1.9.0",
+    "version": "^0.1.2",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
