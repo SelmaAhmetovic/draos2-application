@@ -1,9 +1,24 @@
 <div class="row">
   <div class="col-md-12">
-    <button class="btn btn-primary pull-right" (click)="addItem()">Add skill</button>
+    <div class="row card card-block">
+      <div class="col-md-12 form-group">
+        <label class="control-label">Skill Title</label>
+        <input type="text" class="form-control" [(ngModel)]="skillTitle" placeholder="Skill Title">
+      </div>
+      <div class="col-md-12 form-group">
+        <label class="control-label">Search for category</label>
+        <input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="skillCategory" [ngbTypeahead]="searchCategory"/>
+      </div>
+      <div class="col-md-12 form-group">
+        <label class="control-label">Description</label>
+        <textarea class="form-control" placeholder="Description" [(ngModel)]="skillDescription"></textarea>
+      </div>
+      <div class="col-md-12">
+        <button class="btn btn-primary" (click)="addItem(skillTitle,skillCategory,skillDescription)">Add skill</button>
+      </div>
+    </div>
   </div>
 </div>
-<br>
 <div class="row">
   <div class="col-md-12">
     <card cardTitle="Data Table">

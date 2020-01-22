@@ -3,7 +3,6 @@ import {PermissionsDataService} from "./permissionsData.service";
 import {ToastrService} from 'ngx-toastr';
 import {DeleteModalComponent} from '../../shared/modals/delete-modal/delete-modal.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {AddItemModalComponent} from '../../shared/modals/add-item-modal/add-item-modal.component';
 
 @Component({
   selector: 'app-permissions-page',
@@ -14,6 +13,8 @@ import {AddItemModalComponent} from '../../shared/modals/add-item-modal/add-item
 export class PermissionsPageComponent implements OnInit {
 
   permissionData: any;
+
+  /* pagination Info */
   pageSize = 10;
   pageNumber = 1;
   permissionTitle: string = '';
@@ -21,9 +22,8 @@ export class PermissionsPageComponent implements OnInit {
 
   constructor(private _permissionsDataService: PermissionsDataService,
               private toastrService: ToastrService,
-              private _modalService: NgbModal){
-
-  }
+              private _modalService: NgbModal)
+  { }
 
   ngOnInit() {
     this.loadData();
@@ -47,16 +47,12 @@ export class PermissionsPageComponent implements OnInit {
     });
   }
 
-  addItem() {
-    const modalRef = this._modalService.open(AddItemModalComponent);
-    modalRef.componentInstance.pageName = 'permission';
-    modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
-      this._permissionsDataService.addItem(receivedEntry.permissionTitle, receivedEntry.permissionDescription);
-      this.toastrService.success('Permission successfully added');
-      modalRef.close();
-    });
+  addItem(permissionTitle,permissionDescription) {
+    this._permissionsDataService.addItem(permissionTitle, permissionDescription);
+    this.toastrService.success('Permission successfully added');
+    this.permissionTitle = '';
+    this.permissionDescription = '';
   }
-
 
   pageChanged(pN: number): void {
     this.pageNumber = pN;
