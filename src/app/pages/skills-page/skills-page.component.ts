@@ -6,6 +6,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Observable} from 'rxjs';
 import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
 import {CategoriesDataService} from '../categories-page/categoriesData.service';
+import {AddItemModalComponent} from '../../shared/modals/add-item-modal/add-item-modal.component';
 
 @Component({
   selector: 'app-skills-page',
@@ -66,13 +67,14 @@ export class SkillsPageComponent implements OnInit {
       modalRef.close();
     });
   }
-
-  addItem(skillTitle, skillCategory, skillDescription) {
-    this._skillsDataService.addItem(skillTitle, skillCategory, skillDescription);
-    this.toastrService.success('Skill successfully added');
-    this.skillTitle = '';
-    this.skillCategory = '';
-    this.skillDescription = '';
+  addItem() {
+    const modalRef = this._modalService.open(AddItemModalComponent);
+    modalRef.componentInstance.pageName = 'skill';
+    modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
+      this._skillsDataService.addItem(receivedEntry.skillTitle, receivedEntry.skillCategory, receivedEntry.skillDescription);
+      this.toastrService.success('Skill successfully added');
+      modalRef.close();
+    });
   }
 
   searchCategory = (text$: Observable<string>) =>

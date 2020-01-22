@@ -13,6 +13,7 @@ import {SkillsManagementDataService} from "./skills-management-page/skillsManage
 import {SkillsDataService} from "./skills-page/skillsData.service";
 import {AlertService} from '../shared/services';
 import {DeleteModalComponent} from '../shared/modals/delete-modal/delete-modal.component';
+import {AddItemModalComponent} from '../shared/modals/add-item-modal/add-item-modal.component';
 /*import { LoginComponent } from './login/login.component';
 import {RegisterComponent} from "./register/register.component";*/
 
@@ -29,7 +30,8 @@ import {RegisterComponent} from "./register/register.component";*/
         PagesComponent
     ],
     entryComponents: [
-      DeleteModalComponent
+      DeleteModalComponent,
+      AddItemModalComponent
     ],
     providers: [
       SkillsManagementDataService,

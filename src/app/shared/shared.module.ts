@@ -17,6 +17,9 @@ import { AlertComponent } from './components/alert/alert.component';
 import { WeatherComponent } from './components/weather/weather.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { DeleteModalComponent } from './modals/delete-modal/delete-modal.component';
+import {AddItemModalComponent} from './modals/add-item-modal/add-item-modal.component';
+import {routing} from '../pages/skills-page/skills-page.routing';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -25,6 +28,7 @@ import { DeleteModalComponent } from './modals/delete-modal/delete-modal.compone
     FormsModule,
     ReactiveFormsModule,
     JsonpModule,
+    NgbModule
   ],
   declarations: [
     CardComponent,
@@ -38,7 +42,8 @@ import { DeleteModalComponent } from './modals/delete-modal/delete-modal.compone
     AlertComponent,
     WeatherComponent,
     ProfileComponent,
-    DeleteModalComponent
+    DeleteModalComponent,
+    AddItemModalComponent
   ],
   exports: [
     CardComponent,
@@ -52,7 +57,8 @@ import { DeleteModalComponent } from './modals/delete-modal/delete-modal.compone
     AlertComponent,
     WeatherComponent,
     ProfileComponent,
-    DeleteModalComponent
+    DeleteModalComponent,
+    AddItemModalComponent
   ]
 })
 export class SharedModule { }
