@@ -7,6 +7,7 @@ import {forEach} from "@angular/router/src/utils/collection";
 import {ToastrService} from 'ngx-toastr';
 import {DeleteModalComponent} from '../../shared/modals/delete-modal/delete-modal.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {AddItemModalComponent} from '../../shared/modals/add-item-modal/add-item-modal.component';
 
 @Component({
   selector: 'app-trainings-page',
@@ -69,19 +70,14 @@ export class TrainingPageComponent implements OnInit {
 
   }
 
-  addItem(trainingTitle, trainingSkill, trainingDescription) {
-    this._trainingDataService.addItem(trainingTitle, trainingSkill, trainingDescription);
-    this.toastrService.success('Training successfully deleted');
-    this.trainingTitle = '';
-    this.trainingSkill = '';
-    this.trainingDescription = '';
+  addItem() {
+    const modalRef = this._modalService.open(AddItemModalComponent);
+    modalRef.componentInstance.pageName = 'training';
+    modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
+      this._trainingDataService.addItem(receivedEntry.trainingTitle, receivedEntry.trainingSkill, receivedEntry.trainingDescription);
+      this.toastrService.success('Training successfully deleted');
+      modalRef.close();
+    });
   }
 
-  searchSkill = (text$: Observable<string>) =>
-    text$.pipe(
-      debounceTime(200),
-      distinctUntilChanged(),
-      map(term => term.length < 2 ? []
-        : this.skills.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
-    )
 }
