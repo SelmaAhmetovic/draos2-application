@@ -4,7 +4,6 @@ import {PermissionsDataService} from '../permissions-page/permissionsData.servic
 import {ToastrService} from 'ngx-toastr';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DeleteModalComponent} from '../../shared/modals/delete-modal/delete-modal.component';
-import {AddItemModalComponent} from '../../shared/modals/add-item-modal/add-item-modal.component';
 
 @Component({
   selector: 'app-categories-page',
@@ -52,14 +51,11 @@ export class CategoriesPageComponent implements OnInit {
 
   }
 
-  addItem() {
-    const modalRef = this._modalService.open(AddItemModalComponent);
-    modalRef.componentInstance.pageName = 'category';
-    modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
-      this._categoriesDataService.addItem(receivedEntry.categoryTitle, receivedEntry.categoryDescription);
-      this.toastrService.success('Category successfully added');
-      modalRef.close();
-    });
+  addItem(permissionTitle,permissionDescription) {
+    this._categoriesDataService.addItem(permissionTitle, permissionDescription);
+    this.toastrService.success('Category successfully added');
+    this.categoryTitle = '';
+    this.categoryDescription = '';
   }
 
 

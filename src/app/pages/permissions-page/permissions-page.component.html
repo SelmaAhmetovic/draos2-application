@@ -1,9 +1,20 @@
 <div class="row">
   <div class="col-md-12">
-    <button class="btn btn-primary pull-right" (click)="addItem()">Add permission</button>
+    <div class="row card card-block">
+      <div class="col-md-12 form-group">
+        <label class="control-label">Permission Title</label>
+        <input type="text" class="form-control" placeholder="Permission Title" [(ngModel)]="permissionTitle">
+      </div>
+      <div class="col-md-12 form-group">
+        <label class="control-label">Description</label>
+        <textarea class="form-control" placeholder="Description" [(ngModel)]="permissionDescription"></textarea>
+      </div>
+      <div class="col-md-12">
+        <button class="btn btn-primary" (click)="addItem(permissionTitle,permissionDescription)">Add permission</button>
+      </div>
+    </div>
   </div>
 </div>
-<br>
 <div class="row">
   <div class="col-md-12">
     <card cardTitle="Data Table">
